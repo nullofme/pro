@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<section class="main">
+    <div class="music " id="musicMenu">
+        <audio src="music/music.mp3" id="musicAudio" loop autoplay="true"></audio>
+        <!--autoplay 自动播放  preload 音频是否进行预加载  play音频播放  pause 音频停止-->
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide page1">
+                <img src="img/person.png" alt="" class="img1">
+                <img src="img/1.gif" alt="" class="img2">
+            </div>
+            <div class="swiper-slide page2">
+                <div class="bor">
+                    <h3>自我介绍</h3>
+                    <p>
+                        姓名：<br>
+                        性别：女<br>
+                        毕业院校：<br>
+                        户籍：<br>
+                        兴趣爱好：
+                    </p>
+                </div>
+                <img src="img/kaola.png" alt="" class="img21">
+            </div>
+            <div class="swiper-slide page3">
+                <p class="job">Working Experience</p>
+               <div class="green">
+                   <p class="p1">时间</p>
+                   <p class="p3" >工作单位<br>职位说明</p>
+                   <img src="img/green.png" alt="" class="img31">
+               </div>
+                <div class="blue">
+                    <p class="p1">2015/06</p>
+                    <p class="p2" >限公司<br>职位：</p>
+                    <img src="img/blue.png" alt="" class="img31">
+                </div>
+                <div class="red">
+                    <p class="p1">2016/02</p>
+                    <p class="p2" >限公司<br>职位：</p>
+                    <img src="img/red.png" alt="" class="img33">
+                </div>
+            </div>
+            <div class="swiper-slide page4">
+                <p class="p1">My skills</p>
+                <span class="o1">html</span>
+                <span class="o2">css</span>
+                <span class="o7">h5</span>
+                <span class="o8">css3</span>
+                <span class="o3">js</span>
+                <span class="o4">node</span>
+                <span class="o5">vue</span>
+                <span class="o6">react</span>
+                <div id="box">
+                    <img src="img/41.png" alt="" class="img41" >
+                    <img src="img/42.png" alt="" class="img42">
+                </div>
+            </div>
+            <div class="swiper-slide page5">
+                <p class="p1">谢谢观看！！!</p>
+                <img src="img/end.png" alt="" class="img51">
+                <p class="p2">&nbsp;&nbsp;In the future, you will be grateful for your hard work!!!</p>
+            </div>
+        </div>
+    </div>
+    <div class="arrow"></div>
+</section>
+
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript">
+    function refresRem() {
+        var desW = 640;
+        var winW = document.documentElement.clientWidth;
+        var radio = desW / winW;
+        document.documentElement.style.fontSize = 100 / radio + "px";
+    }
+    refresRem();
+    window.addEventListener("resize",refresRem);
+
+    var swiper = new Swiper(".swiper-container", {
+        loop: true,
+        direction: "vertical",
+        onTransitionEnd: function (swiper) {
+            var slides = swiper.slides;
+            var curIndex = swiper.activeIndex;//当前屏幕显示的滑块的索引
+            var total = slides.length;
+            var targetId = "page0";
+            switch (curIndex % (total-2)) {
+                case 1:
+                    targetId += 1;
+                    break;
+                case 2:
+                    targetId += 2;
+                    break;
+                case 3:
+                    targetId += 3;
+                    break;
+                case 4:
+                    targetId += 4;
+                    break;
+                default:
+                    targetId += 5;
+            }
+            [].forEach.call(slides, function (item, index) {
+                if (curIndex == index) {
+                    item.id = targetId;
+                } else {
+                    item.id = null;
+                }
+            })
+        }
+    });
+
+    var oMusic = document.getElementById("musicMenu");
+    var audioMusic = document.getElementById("musicAudio");
+    setTimeout(function () {
+        oMusic.className = "music musicMove"
+    }, 1000);
+    /*定时器，音乐跟动画同步*/
+    oMusic.addEventListener('touchstart',function () {
+        if (audioMusic.paused) {
+            audioMusic.play();
+            oMusic.className = "music musicMove"
+        }
+        else {
+            audioMusic.pause();
+            oMusic.className = "music"
+        }
+    });
+</script>
+</body>
+</html>
